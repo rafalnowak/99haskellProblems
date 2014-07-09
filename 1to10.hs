@@ -22,3 +22,9 @@ elementAt [] 1 = error "Index out of bounds"
 myLength :: (Num b) => [a] -> b
 myLength [] = 0
 myLength (_:xs) = 1 + myLength xs
+
+-- #5
+myReverse :: [a] -> [a]
+myReverse (elem:[]) = elem:[]
+myReverse [] = []
+myReverse (x:xs) = myReverse xs ++ (x:[])
