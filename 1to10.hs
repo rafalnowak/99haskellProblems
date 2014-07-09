@@ -16,4 +16,9 @@ elementAt :: (Integral b) => [a] -> b -> a
 elementAt (x:xs) index
     | index > 1 = elementAt xs (index - 1)
     | otherwise = x
-elementAt [] index = error "Index out of bounds"
+elementAt [] 1 = error "Index out of bounds"
+
+-- #4
+myLength :: (Num b) => [a] -> b
+myLength [] = 0
+myLength (_:xs) = 1 + myLength xs
