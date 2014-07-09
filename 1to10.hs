@@ -1,5 +1,4 @@
 -- #1
-
 myLast :: [a] -> a
 myLast list = case list of [] -> error "There is no last element for empty list"
                            (elem:[]) -> elem
@@ -11,3 +10,10 @@ myButLast [] = error "No one but last element for empty list"
 myButLast [elem] = error "No one but last element for single element list"
 myButLast (a:_:[]) = a
 myButLast (_:xs) = myButLast xs
+
+-- #3
+elementAt :: (Integral b) => [a] -> b -> a
+elementAt (x:xs) index
+    | index > 1 = elementAt xs (index - 1)
+    | otherwise = x
+elementAt [] index = error "Index out of bounds"
