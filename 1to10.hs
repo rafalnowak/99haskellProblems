@@ -28,3 +28,10 @@ myReverse :: [a] -> [a]
 myReverse (elem:[]) = elem:[]
 myReverse [] = []
 myReverse (x:xs) = myReverse xs ++ (x:[])
+
+-- #6
+isPalindrome :: (Eq a) => [a] -> Bool
+isPalindrome [] = True
+isPalindrome (_:[]) = True
+isPalindrome (x:xs) = (x == last xs) && isPalindrome (init xs)
+
