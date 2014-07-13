@@ -43,3 +43,12 @@ compress (a:b:xs)
     | a == b = compress (b:xs)
     | otherwise = a : (compress (b:xs))
 
+-- #10
+encode :: (Eq a, Num b) => [a] -> [(b,a)]
+encode [] = error "Encode cannot be performed on empty list"
+encode list = encodeWithCount list 1
+    where encodeWithCount [a] count = [(count, a)]
+          encodeWithCount (a:b:xs) count
+              | a == b = encodeWithCount (b:xs) (count+1)
+              | otherwise = (count, a) : (encodeWithCount (b:xs) 1)
+
