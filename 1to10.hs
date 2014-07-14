@@ -43,11 +43,22 @@ compress (a:b:xs)
     | a == b = compress (b:xs)
     | otherwise = a : (compress (b:xs))
 
+-- #9
+pack :: (Eq a) => [a] -> [[a]]
+pack [a] = [[a]]
+pack list = packWithAccumulator list []
+    where packWithAccumulator :: (Eq a) => [a] -> [a] -> [[a]]
+          packWithAccumulator [a] acc = [a:acc]
+          packWithAccumulator (a:b:xs) acc
+              | a == b = packWithAccumulator (b:xs) (a:acc)
+              | otherwise = (a:acc) : (packWithAccumulator (b:xs) [])
+
 -- #10
 encode :: (Eq a, Num b) => [a] -> [(b,a)]
 encode [] = error "Encode cannot be performed on empty list"
 encode list = encodeWithCount list 1
-    where encodeWithCount [a] count = [(count, a)]
+    where encodeWithCount :: (Eq a, Num b) => [a] -> b -> [(b,a)]
+          encodeWithCount [a] count = [(count, a)]
           encodeWithCount (a:b:xs) count
               | a == b = encodeWithCount (b:xs) (count+1)
               | otherwise = (count, a) : (encodeWithCount (b:xs) 1)
