@@ -35,6 +35,14 @@ isPalindrome [] = True
 isPalindrome (_:[]) = True
 isPalindrome (x:xs) = (x == last xs) && isPalindrome (init xs)
 
+-- #7
+data NestedList a = Elem a | List [NestedList a] deriving (Show)
+
+myFlatten :: NestedList a -> [a]
+myFlatten (Elem a) = [a]
+myFlatten (List []) = []
+myFlatten (List (x:xs)) = myFlatten x ++ myFlatten (List xs)
+
 -- #8
 compress :: (Eq a) => [a] -> [a]
 compress [] = []
