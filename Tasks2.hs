@@ -6,6 +6,12 @@ dupli [] = []
 dupli [x] = [x, x]
 dupli (x:xs) = x : x : dupli xs
 
+-- #15
+repli :: [a] -> Int -> [a]
+repli list n = do
+    char <- list
+    replicate n char
+
 -- #17
 split :: [a] -> Int -> ([a], [a])
 split [] _ = ([], [])
