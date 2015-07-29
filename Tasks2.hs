@@ -12,6 +12,16 @@ repli list n = do
     char <- list
     replicate n char
 
+-- #16
+dropEvery :: [a] -> Int -> [a]
+dropEvery [] _ = []
+dropEvery xss i = dropListWithCounter xss 1 []
+    where dropListWithCounter :: [a] -> Int -> [a] -> [a]
+          dropListWithCounter (x:xs) counter acc
+            | counter `mod` i == 0 = dropListWithCounter xs (counter + 1) acc
+            | otherwise = dropListWithCounter xs (counter + 1) (x : acc)
+          dropListWithCounter [] _ acc = reverse acc
+
 -- #17
 split :: [a] -> Int -> ([a], [a])
 split [] _ = ([], [])
