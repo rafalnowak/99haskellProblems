@@ -16,11 +16,12 @@ repli list n = do
 dropEvery :: [a] -> Int -> [a]
 dropEvery [] _ = []
 dropEvery xss i = dropListWithCounter xss 1 []
-    where dropListWithCounter :: [a] -> Int -> [a] -> [a]
-          dropListWithCounter (x:xs) counter acc
+    where 
+        dropListWithCounter :: [a] -> Int -> [a] -> [a]
+        dropListWithCounter (x:xs) counter acc
             | counter `mod` i == 0 = dropListWithCounter xs (counter + 1) acc
             | otherwise = dropListWithCounter xs (counter + 1) (x : acc)
-          dropListWithCounter [] _ acc = reverse acc
+        dropListWithCounter [] _ acc = reverse acc
 
 -- #17
 split :: [a] -> Int -> ([a], [a])
@@ -29,6 +30,17 @@ split list@(x:xs) len
     | len > 0 = (x : ys, zs)
     | otherwise = ([], list)
     where (ys, zs) = split xs (len - 1)
+
+-- #18
+slice :: [a] -> Int -> Int -> [a]
+slice [] _ _ = []
+slice xss start end = sliceIter xss 1 []
+    where 
+        sliceIter :: [a] -> Int -> [a] -> [a]
+        sliceIter (x:xs) counter acc
+            | counter >= start && counter <= end = sliceIter xs (counter + 1) (x : acc)
+            | otherwise = sliceIter xs (counter + 1) acc
+        sliceIter [] _ acc = reverse acc
 
 -- #19
 rotate :: [a] -> Int -> [a]
